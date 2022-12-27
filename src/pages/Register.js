@@ -1,10 +1,12 @@
+import { collection, getFirestore } from "firebase/firestore";
 import { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useCollection } from 'react-firebase-hooks/firestore';
+import { useCollection } from "react-firebase-hooks/firestore";
 
 import firebase from "../util/Firebase";
 
 const auth = firebase.auth();
+const firestore = firebase.firestore();
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -13,6 +15,8 @@ const Register = () => {
 
     const [createUserWithEmailAndPassword, user, loading, error] =
         useCreateUserWithEmailAndPassword(auth);
+
+    const usersRef = firestore.collection("users");
 
     const validate = () => {
         let isValid = true;
@@ -32,8 +36,21 @@ const Register = () => {
         e.preventDefault();
         console.log(validate());
         if (validate()) {
-            createUserWithEmailAndPassword(email, password);
+            createUserWithEmailAndPassword(email, password).then(
+                (currentUser) => {
+                    firestore.collection("users").add({
+                        id: currentUser.user.uid,
+                        email: email,
+                        name: name,
+                        signInDate:
+                            firebase.firestore.FieldValue.serverTimestamp(),
+                    });
+                }
+            );
         }
+        setName("");
+        setEmail("");
+        setPassword("");
     };
 
     if (error) {
