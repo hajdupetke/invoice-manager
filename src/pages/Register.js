@@ -4,6 +4,7 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 
 import firebase from "../util/Firebase";
+import bcrypt from "bcryptjs";
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
@@ -42,6 +43,10 @@ const Register = () => {
                         id: currentUser.user.uid,
                         email: email,
                         name: name,
+                        password: bcrypt.hashSync(
+                            password,
+                            "$2a$10$RoBb8JfJyKRnKiaKJhtVN."
+                        ),
                         signInDate:
                             firebase.firestore.FieldValue.serverTimestamp(),
                     });
@@ -58,7 +63,7 @@ const Register = () => {
     }
 
     if (user) {
-        console.log(user.user.uid);
+        console.log(user.user);
     }
 
     return (
