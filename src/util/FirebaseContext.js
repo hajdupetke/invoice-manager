@@ -69,14 +69,20 @@ export const FirebaseContextProvider = ({ children }) => {
             .where("uid", "==", auth.currentUser.uid)
             .get();
 
+        let result = [];
+
         if (invoices.empty) {
             console.log("No documents");
             return;
         }
 
-        invoices.forEach((element) => {
-            console.log(element.id, "=>", element.data());
+        invoices.forEach((doc) => {
+            const data = doc.data();
+            delete data.uid;
+            result = [...result, { id: doc.id, data: data }];
         });
+
+        return result;
     };
 
     const getUserData = async (uid) => {

@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
     if (!user) {
-        return navigate("/");
+        return navigate("/login");
     }
     return children;
 };

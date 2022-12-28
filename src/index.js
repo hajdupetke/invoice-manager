@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import ProtectedRoute from "./util/ProtectedRoute";
+import Invoices from "./pages/Invoices";
 
 import reportWebVitals from "./reportWebVitals";
 import {
@@ -16,13 +17,40 @@ import {
 import { FirebaseContextProvider } from "./util/FirebaseContext";
 
 const router = createBrowserRouter([
-    { path: "/", element: <Login /> },
-    { path: "register", element: <Register /> },
     {
-        path: "invoices",
+        path: "/",
         element: (
             <ProtectedRoute>
                 <Main />
+            </ProtectedRoute>
+        ),
+    },
+    { path: "register", element: <Register /> },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/invoices",
+        element: (
+            <ProtectedRoute>
+                <Invoices />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: "/invoices/:id",
+        element: (
+            <ProtectedRoute>
+                <Invoices />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: "/create",
+        element: (
+            <ProtectedRoute>
+                <Invoices />
             </ProtectedRoute>
         ),
     },
@@ -30,11 +58,9 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <React.StrictMode>
-        <FirebaseContextProvider>
-            <RouterProvider router={router} />
-        </FirebaseContextProvider>
-    </React.StrictMode>
+    <FirebaseContextProvider>
+        <RouterProvider router={router} />
+    </FirebaseContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
