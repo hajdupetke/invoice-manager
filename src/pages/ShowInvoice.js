@@ -17,33 +17,70 @@ const ShowInvoice = () => {
     const { buyerName, comment, dueDate, issueDate, itemName, price } = invoice;
 
     return (
-        <div>
+        <div className="max-w-[700px] mx-auto py-5">
             <form>
-                <label>Buyer's name</label>
-                <input disabled type="text" defaultValue={buyerName} />
-                <br />
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Buyer's name</label>
+                    <input
+                        className="border p-3"
+                        disabled
+                        type="text"
+                        defaultValue={buyerName}
+                    />
+                </div>
 
-                <label>Item name</label>
-                <input disabled type="text" defaultValue={itemName} />
-                <br />
-
-                <label>Price</label>
-                <input disabled type="number" defaultValue={price} />
-                <br />
-
-                <label>Issue date</label>
-                <input disabled type="date" defaultValue={issueDate} />
-                <br />
-
-                <label>Due date</label>
-                <input disabled type="date" defaultValue={dueDate} />
-                <br />
-
-                <label>Comment</label>
-                <input disabled type="textarea" defaultValue={comment} />
-                <br />
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Item name</label>
+                    <input
+                        className="border p-3"
+                        disabled
+                        type="text"
+                        defaultValue={itemName}
+                    />
+                </div>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Price</label>
+                    <input
+                        className="border p-3"
+                        disabled
+                        type="number"
+                        defaultValue={price}
+                    />
+                </div>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Issue date</label>
+                    <input
+                        className="border p-3"
+                        disabled
+                        type="date"
+                        defaultValue={issueDate}
+                    />
+                </div>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Due date</label>
+                    <input
+                        className="border p-3"
+                        disabled
+                        type="date"
+                        defaultValue={dueDate}
+                    />
+                </div>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Comment</label>
+                    <input
+                        className="border p-3"
+                        disabled
+                        type="textarea"
+                        defaultValue={comment}
+                    />
+                </div>
             </form>
-            <button onClick={() => navigate("/")}>Go back</button>
+            <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4"
+                onClick={() => navigate("/")}
+            >
+                Go back
+            </button>
         </div>
     );
 };

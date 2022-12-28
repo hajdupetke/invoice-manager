@@ -22,53 +22,74 @@ const CreateInvoice = () => {
     };
 
     return (
-        <div>
+        <div className="max-w-[700px] mx-auto py-5">
             <form onSubmit={handleSubmit}>
-                <label>Buyer's name</label>
-                <input
-                    type="text"
-                    onChange={(e) => setBuyerName(e.target.value)}
-                />
-                <br />
-
-                <label>Item name</label>
-                <input
-                    type="text"
-                    onChange={(e) => setItemName(e.target.value)}
-                />
-                <br />
-
-                <label>Price</label>
-                <input
-                    type="number"
-                    onChange={(e) => setPrice(e.target.value)}
-                />
-                <br />
-
-                <label>Issue date</label>
-                <input
-                    type="date"
-                    onChange={(e) => setIssueDate(e.target.value.toString())}
-                />
-                <br />
-
-                <label>Due date</label>
-                <input
-                    type="date"
-                    onChange={(e) => setDueDate(e.target.value.toString())}
-                />
-                <br />
-
-                <label>Comment</label>
-                <input
-                    type="textarea"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                />
-                <br />
-                <button type="submit">Submit</button>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Buyer's name</label>
+                    <input
+                        className="border p-3"
+                        type="text"
+                        onChange={(e) => setBuyerName(e.target.value)}
+                    />
+                </div>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Item name</label>
+                    <input
+                        className="border p-3"
+                        type="text"
+                        onChange={(e) => setItemName(e.target.value)}
+                    />
+                </div>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Price</label>
+                    <input
+                        className="border p-3"
+                        type="number"
+                        onChange={(e) => setPrice(e.target.value)}
+                    />
+                </div>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Issue date</label>
+                    <input
+                        className="border p-3"
+                        type="date"
+                        onChange={(e) =>
+                            setIssueDate(e.target.value.toString())
+                        }
+                    />
+                </div>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Due date</label>
+                    <input
+                        className="border p-3"
+                        type="date"
+                        onChange={(e) => setDueDate(e.target.value.toString())}
+                    />
+                </div>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Comment</label>
+                    <input
+                        className="border p-3"
+                        type="textarea"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4"
+                        type="submit"
+                    >
+                        Submit
+                    </button>
+                    <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4"
+                        onClick={() => navigate("/invoices")}
+                    >
+                        Go back
+                    </button>
+                </div>
             </form>
-            <button onClick={() => navigate("/invoices")}>Go back</button>
         </div>
     );
 };
