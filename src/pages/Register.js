@@ -40,6 +40,7 @@ const Register = () => {
                 <div className="flex flex-col py-2">
                     <label className="py-2 font-medium">Name</label>
                     <input
+                        required
                         className="border p-3"
                         type="text"
                         name="name"
@@ -50,6 +51,7 @@ const Register = () => {
                 <div className="flex flex-col py-2">
                     <label className="py-2 font-medium">Email Address</label>
                     <input
+                        required
                         className="border p-3"
                         type="email"
                         name="email"
@@ -60,6 +62,7 @@ const Register = () => {
                 <div className="flex flex-col py-2">
                     <label className="py-2 font-medium">Password</label>
                     <input
+                        required
                         className="border p-3"
                         type="password"
                         name="name"
@@ -71,6 +74,13 @@ const Register = () => {
                 <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4"
                     type="submit"
+                    disabled={
+                        !(
+                            name.length > 0 &&
+                            email.length > 0 &&
+                            password.length > 0
+                        )
+                    }
                 >
                     Register
                 </button>

@@ -42,6 +42,7 @@ const Login = () => {
                 <div className="flex flex-col py-2">
                     <label className="py-2 font-medium">Email</label>
                     <input
+                        required
                         className="border p-3"
                         type="email"
                         name="email"
@@ -52,6 +53,7 @@ const Login = () => {
                 <div className="flex flex-col py-2">
                     <label className="py-2 font-medium">Password</label>
                     <input
+                        required
                         className="border p-3"
                         type="password"
                         name="name"
@@ -59,7 +61,17 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                {error ? <div>{error.message}</div> : <></>}
+
+                {error.length > 0 ? (
+                    <div
+                        className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                        role="alert"
+                    >
+                        <span className="block sm:inline">{error}</span>
+                    </div>
+                ) : (
+                    <></>
+                )}
 
                 {loginAttempts > 3 ? (
                     <Recaptcha
@@ -72,6 +84,7 @@ const Login = () => {
                 <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4"
                     type="submit"
+                    disabled={!(password.length >= 8 && email.length > 0)}
                 >
                     Log in
                 </button>

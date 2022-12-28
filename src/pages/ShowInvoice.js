@@ -77,7 +77,7 @@ const ShowInvoice = () => {
             </form>
             <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/invoices")}
             >
                 Go back
             </button>

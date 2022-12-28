@@ -103,7 +103,7 @@ export const FirebaseContextProvider = ({ children }) => {
         itemName,
         price
     ) => {
-        invoiceRef.doc().set({
+        return invoiceRef.doc().set({
             buyerName,
             comment,
             dueDate,

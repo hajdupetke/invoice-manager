@@ -25,10 +25,10 @@ const Invoices = () => {
             return (
                 <tr
                     key={id}
-                    className="border-b "
+                    className="border-b cursor-pointer hover:bg-slate-300"
                     onClick={() => navigate("/invoices/" + id)}
                 >
-                    <td className="text-m  text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                    <td className="text-m  text-gray-900 font-medium py-4 whitespace-nowrap">
                         {buyerName}
                     </td>
                     <td className="text-m  text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
@@ -52,14 +52,14 @@ const Invoices = () => {
     };
 
     return (
-        <div className="max-w-[700px] mx-auto py-20 text-l">
+        <div className="max-w-[1000px] mx-auto py-20 text-l">
             <div>
-                <h2 className="text-3xl font-bold py-10">Invoices</h2>
+                <h2 className="text-3xl font-bold py-3">Invoices</h2>
             </div>
             <table className="min-w-full">
                 <thead className="border-b">
                     <tr>
-                        <th className="text-m  text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
+                        <th className="text-m  text-gray-900 font-bold py-4 whitespace-nowrap">
                             Buyer's name
                         </th>
                         <th className="text-m  text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
