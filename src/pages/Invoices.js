@@ -48,7 +48,7 @@ const Invoices = () => {
                         <th>Price</th>
                     </tr>
                 </thead>
-                <tbody>{renderInvoices()}</tbody>
+                <tbody>{invoices ? renderInvoices() : <></>}</tbody>
             </table>
             <button onClick={() => navigate("/create")}>Create</button>
             <button onClick={() => navigate("/")}>Go back</button>

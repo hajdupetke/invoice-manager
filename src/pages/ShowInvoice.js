@@ -20,27 +20,27 @@ const ShowInvoice = () => {
         <div>
             <form>
                 <label>Buyer's name</label>
-                <input disabled type="text" value={buyerName} />
+                <input disabled type="text" defaultValue={buyerName} />
                 <br />
 
                 <label>Item name</label>
-                <input disabled type="text" value={itemName} />
+                <input disabled type="text" defaultValue={itemName} />
                 <br />
 
                 <label>Price</label>
-                <input disabled type="number" value={Number(price)} />
+                <input disabled type="number" defaultValue={price} />
                 <br />
 
                 <label>Issue date</label>
-                <input disabled type="date" value={issueDate} />
+                <input disabled type="date" defaultValue={issueDate} />
                 <br />
 
                 <label>Due date</label>
-                <input disabled type="date" value={dueDate} />
+                <input disabled type="date" defaultValue={dueDate} />
                 <br />
 
                 <label>Comment</label>
-                <input disabled type="textarea" value={comment} />
+                <input disabled type="textarea" defaultValue={comment} />
                 <br />
             </form>
             <button onClick={() => navigate("/")}>Go back</button>
