@@ -1,8 +1,5 @@
-import { collection, getFirestore } from "firebase/firestore";
 import { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useCollection } from "react-firebase-hooks/firestore";
-
 import firebase from "../util/Firebase";
 import bcrypt from "bcryptjs";
 
@@ -39,8 +36,7 @@ const Register = () => {
         if (validate()) {
             createUserWithEmailAndPassword(email, password).then(
                 (currentUser) => {
-                    firestore.collection("users").add({
-                        id: currentUser.user.uid,
+                    usersRef.doc(currentUser.user.uid).set({
                         email: email,
                         name: name,
                         password: bcrypt.hashSync(
