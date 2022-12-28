@@ -28,7 +28,7 @@ const ShowInvoice = () => {
                 <br />
 
                 <label>Price</label>
-                <input disabled type="text" value={price} />
+                <input disabled type="number" value={Number(price)} />
                 <br />
 
                 <label>Issue date</label>
@@ -43,6 +43,7 @@ const ShowInvoice = () => {
                 <input disabled type="textarea" value={comment} />
                 <br />
             </form>
+            <button onClick={() => navigate("/")}>Go back</button>
         </div>
     );
 };

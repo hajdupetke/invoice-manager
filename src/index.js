@@ -16,6 +16,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import { FirebaseContextProvider } from "./util/FirebaseContext";
+import CreateInvoice from "./pages/CreateInvoice";
 
 const router = createBrowserRouter([
     {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
         path: "/create",
         element: (
             <ProtectedRoute>
-                <Invoices />
+                <CreateInvoice />
             </ProtectedRoute>
         ),
     },
