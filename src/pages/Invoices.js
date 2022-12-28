@@ -23,35 +23,76 @@ const Invoices = () => {
             const { buyerName, comment, dueDate, issueDate, itemName, price } =
                 data;
             return (
-                <tr key={id} onClick={() => navigate("/invoices/" + id)}>
-                    <td>{buyerName}</td>
-                    <td>{comment}</td>
-                    <td>{dueDate}</td>
-                    <td>{issueDate}</td>
-                    <td>{itemName}</td>
-                    <td>{price}</td>
+                <tr
+                    key={id}
+                    className="border-b "
+                    onClick={() => navigate("/invoices/" + id)}
+                >
+                    <td className="text-m  text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                        {buyerName}
+                    </td>
+                    <td className="text-m  text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                        {comment}
+                    </td>
+                    <td className="text-m  text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                        {dueDate}
+                    </td>
+                    <td className="text-m  text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                        {issueDate}
+                    </td>
+                    <td className="text-m  text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                        {itemName}
+                    </td>
+                    <td className="text-m  text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                        {price}
+                    </td>
                 </tr>
             );
         });
     };
 
     return (
-        <div>
-            <table>
-                <thead>
+        <div className="max-w-[700px] mx-auto py-20 text-l">
+            <div>
+                <h2 className="text-3xl font-bold py-10">Invoices</h2>
+            </div>
+            <table className="min-w-full">
+                <thead className="border-b">
                     <tr>
-                        <th>Buyer's name</th>
-                        <th>Comment</th>
-                        <th>Due Date</th>
-                        <th>Issue Date</th>
-                        <th>Item Name</th>
-                        <th>Price</th>
+                        <th className="text-m  text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
+                            Buyer's name
+                        </th>
+                        <th className="text-m  text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
+                            Comment
+                        </th>
+                        <th className="text-m  text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
+                            Due Date
+                        </th>
+                        <th className="text-m  text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
+                            Issue Date
+                        </th>
+                        <th className="text-m  text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
+                            Item Name
+                        </th>
+                        <th className="text-m  text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
+                            Price
+                        </th>
                     </tr>
                 </thead>
                 <tbody>{invoices ? renderInvoices() : <></>}</tbody>
             </table>
-            <button onClick={() => navigate("/create")}>Create</button>
-            <button onClick={() => navigate("/")}>Go back</button>
+            <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-10"
+                onClick={() => navigate("/create")}
+            >
+                Create
+            </button>
+            <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-4"
+                onClick={() => navigate("/")}
+            >
+                Go back
+            </button>
         </div>
     );
 };

@@ -15,21 +15,37 @@ const Main = () => {
     }, []);
 
     return (
-        <div>
-            <nav>
-                <button onClick={() => navigate("/invoices")}>Invoices</button>
-                <button onClick={() => navigate("/create")}>
+        <div className="max-w-[700px] mx-auto py-5 text-xl">
+            <nav className="flex justify-between">
+                <button
+                    className="px-3 hover:text-slate-600"
+                    onClick={() => navigate("/invoices")}
+                >
+                    Invoices
+                </button>
+                <button
+                    className="px-3 hover:text-slate-600"
+                    onClick={() => navigate("/create")}
+                >
                     Create invoice
                 </button>
-                <button onClick={async () => await auth.signOut()}>
+                <button
+                    className="px-3 hover:text-slate-600"
+                    onClick={async () => await auth.signOut()}
+                >
                     Log out
                 </button>
             </nav>
-            <div>
-                <p>Name: {user.name}</p>
-                <p>Email: {user.email}</p>
-                <p>
-                    Last log in date:{" "}
+            <div className="my-10">
+                <p className="my-2">
+                    <span className="font-bold px-2">Name:</span>
+                    {user.name}
+                </p>
+                <p className="my-2">
+                    <span className="font-bold px-2">Email:</span> {user.email}
+                </p>
+                <p className="my-2">
+                    <span className="font-bold px-2">Last log in date:</span>{" "}
                     {user.signInDate?.toDate()?.toLocaleString()}
                 </p>
             </div>
