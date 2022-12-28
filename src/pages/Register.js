@@ -19,9 +19,9 @@ const Register = () => {
     const validate = () => {
         let isValid = true;
         if (
-            name == "" ||
-            email == "" ||
-            password == "" ||
+            name === "" ||
+            email === "" ||
+            password === "" ||
             password.length < 8
         ) {
             isValid = false;

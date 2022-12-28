@@ -20,7 +20,7 @@ const Login = () => {
     const signIn = (e) => {
         e.preventDefault();
 
-        if (loginAttempts >= 3 && !captcha) return;
+        if (loginAttempts > 3 && !captcha) return;
 
         signInWithEmailAndPassword(email, password).then((currentUser) => {
             if (!error) {
