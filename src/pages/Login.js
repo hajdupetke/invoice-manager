@@ -2,6 +2,7 @@ import { useState } from "react";
 import { UserAuth } from "../util/FirebaseContext";
 import Recaptcha from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -27,35 +28,55 @@ const Login = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Email</label>
-            <input
-                type="email"
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <br />
+        <div className="max-w-[700px] mx-auto py-10">
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <h2 className="text-2xl font-bold">Sign in</h2>
+                    <p className="font-medium">
+                        Don't have an account?{" "}
+                        <Link className="underline" to="/register">
+                            Sign up!
+                        </Link>
+                    </p>
+                </div>
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Email</label>
+                    <input
+                        className="border p-3"
+                        type="email"
+                        name="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
 
-            <label>Password</label>
-            <input
-                type="password"
-                name="name"
-                minLength="8"
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <br />
-            {error ? <div>{error.message}</div> : <></>}
+                <div className="flex flex-col py-2">
+                    <label className="py-2 font-medium">Password</label>
+                    <input
+                        className="border p-3"
+                        type="password"
+                        name="name"
+                        minLength="8"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                {error ? <div>{error.message}</div> : <></>}
 
-            {loginAttempts > 3 ? (
-                <Recaptcha
-                    sitekey="6LcaubMjAAAAAFw_n-tc_2UGUhcwvm4FBB_Q85xB"
-                    onChange={(e) => setCaptcha(true)}
-                />
-            ) : (
-                <></>
-            )}
-            <button type="submit">Log in</button>
-        </form>
+                {loginAttempts > 3 ? (
+                    <Recaptcha
+                        sitekey="6LcaubMjAAAAAFw_n-tc_2UGUhcwvm4FBB_Q85xB"
+                        onChange={(e) => setCaptcha(true)}
+                    />
+                ) : (
+                    <></>
+                )}
+                <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4"
+                    type="submit"
+                >
+                    Log in
+                </button>
+            </form>
+        </div>
     );
 };
 
