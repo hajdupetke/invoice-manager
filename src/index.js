@@ -1,14 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import Register from "./pages/Register";
+import Main from "./pages/Main";
+import Login from "./pages/Login";
+import ProtectedRoute from "./util/ProtectedRoute";
+import firebase from "./util/Firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import reportWebVitals from "./reportWebVitals";
+import {
+    createBrowserRouter,
+    createRoutesFromElements,
+    Route,
+    RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route path="/" element={<Login />}>
+            <Route
+                path="invoices"
+                element={
+                    <ProtectedRoute>
+                        <Main />
+                    </ProtectedRoute>
+                }
+            />
+            <Route path="register" element={<Register />} />
+        </Route>
+    )
+);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <RouterProvider router={router} />
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
