@@ -1,11 +1,12 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import firebase from "./Firebase";
+import { auth } from "./Firebase";
 
 const ProtectedRoute = ({ children }) => {
-    const [user] = useAuthState(firebase.auth());
+    const [user] = useAuthState(auth);
+    const navigate = useNavigate();
     if (!user) {
-        return <Navigate to="/" />;
+        return navigate("/");
     }
     return children;
 };

@@ -1,48 +1,33 @@
-import { useEffect, useState } from "react";
-import firebase from "../util/Firebase";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useState } from "react";
+import { UserAuth } from "../util/FirebaseContext";
 import Recaptcha from "react-google-recaptcha";
-import bcrypt from "bcryptjs";
-
-const auth = firebase.auth();
-const firestore = firebase.firestore();
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [signInWithEmailAndPassword, user, loading, error] =
-        useSignInWithEmailAndPassword(auth);
+    const [error, setError] = useState("");
     const [loginAttempts, setAttempts] = useState(0);
     const [captcha, setCaptcha] = useState(false);
+    const navigate = useNavigate();
 
-    const usersRef = firestore.collection("users");
+    const { userSignIn } = UserAuth();
 
-    const signIn = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (loginAttempts > 3 && !captcha) return;
 
-        signInWithEmailAndPassword(email, password).then((currentUser) => {
-            if (!error) {
-                const userRef = usersRef.doc(currentUser.user.uid);
-                userRef.get().then((doc) => {
-                    if (doc.exists) {
-                        userRef.update({
-                            signInDate:
-                                firebase.firestore.FieldValue.serverTimestamp(),
-                        });
-                    } else {
-                        console.log("Document doesnt exist!");
-                    }
-                });
-            } else {
-                setAttempts(loginAttempts + 1);
-            }
-        });
+        try {
+            await userSignIn(email, password);
+            navigate("/invoices");
+        } catch (e) {
+            setError(e.message);
+            setAttempts(loginAttempts + 1);
+        }
     };
 
     return (
-        <form onSubmit={signIn}>
+        <form onSubmit={handleSubmit}>
             <label>Email</label>
             <input
                 type="email"

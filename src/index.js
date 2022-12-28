@@ -5,8 +5,6 @@ import Register from "./pages/Register";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import ProtectedRoute from "./util/ProtectedRoute";
-import firebase from "./util/Firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 import reportWebVitals from "./reportWebVitals";
 import {
@@ -15,27 +13,27 @@ import {
     Route,
     RouterProvider,
 } from "react-router-dom";
+import { FirebaseContextProvider } from "./util/FirebaseContext";
 
-const router = createBrowserRouter(
-    createRoutesFromElements(
-        <Route path="/" element={<Login />}>
-            <Route
-                path="invoices"
-                element={
-                    <ProtectedRoute>
-                        <Main />
-                    </ProtectedRoute>
-                }
-            />
-            <Route path="register" element={<Register />} />
-        </Route>
-    )
-);
+const router = createBrowserRouter([
+    { path: "/", element: <Login /> },
+    { path: "register", element: <Register /> },
+    {
+        path: "invoices",
+        element: (
+            <ProtectedRoute>
+                <Main />
+            </ProtectedRoute>
+        ),
+    },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <FirebaseContextProvider>
+            <RouterProvider router={router} />
+        </FirebaseContextProvider>
     </React.StrictMode>
 );
 

@@ -1,66 +1,29 @@
 import { useState } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import firebase from "../util/Firebase";
-import bcrypt from "bcryptjs";
-
-const auth = firebase.auth();
-const firestore = firebase.firestore();
+import { UserAuth } from "../util/FirebaseContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const [createUserWithEmailAndPassword, user, loading, error] =
-        useCreateUserWithEmailAndPassword(auth);
+    const { createUser } = UserAuth();
 
-    const usersRef = firestore.collection("users");
-
-    const validate = () => {
-        let isValid = true;
-        if (
-            name === "" ||
-            email === "" ||
-            password === "" ||
-            password.length < 8
-        ) {
-            isValid = false;
-        }
-
-        return isValid;
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(validate());
-        if (validate()) {
-            createUserWithEmailAndPassword(email, password).then(
-                (currentUser) => {
-                    usersRef.doc(currentUser.user.uid).set({
-                        email: email,
-                        name: name,
-                        password: bcrypt.hashSync(
-                            password,
-                            "$2a$10$RoBb8JfJyKRnKiaKJhtVN."
-                        ),
-                        signInDate:
-                            firebase.firestore.FieldValue.serverTimestamp(),
-                    });
-                }
-            );
+        try {
+            await createUser(email, password, name);
+            navigate("/invoices");
+        } catch (e) {
+            setError(e.message);
+            console.log(e.message);
         }
         setName("");
         setEmail("");
         setPassword("");
     };
-
-    if (error) {
-        console.log(error.message);
-    }
-
-    if (user) {
-        console.log(user.user);
-    }
 
     return (
         <form onSubmit={handleSubmit}>
