@@ -68,7 +68,7 @@ const CreateInvoice = () => {
                 <br />
                 <button type="submit">Submit</button>
             </form>
-            <button onClick={() => navigate("/")}>Go back</button>
+            <button onClick={() => navigate("/invoices")}>Go back</button>
         </div>
     );
 };
