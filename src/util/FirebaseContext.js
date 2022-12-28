@@ -85,6 +85,11 @@ export const FirebaseContextProvider = ({ children }) => {
         return result;
     };
 
+    const getInvoice = async (id) => {
+        const invoice = await invoiceRef.doc(id).get();
+        return invoice.data();
+    };
+
     const getUserData = async (uid) => {
         const user = await usersRef.doc(uid).get();
         return user.data();
@@ -117,6 +122,7 @@ export const FirebaseContextProvider = ({ children }) => {
                 createInvoice,
                 getInvoices,
                 getUserData,
+                getInvoice,
             }}
         >
             {children}

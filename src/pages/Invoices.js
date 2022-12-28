@@ -23,7 +23,7 @@ const Invoices = () => {
             const { buyerName, comment, dueDate, issueDate, itemName, price } =
                 data;
             return (
-                <tr key={id}>
+                <tr key={id} onClick={() => navigate("/invoices/" + id)}>
                     <td>{buyerName}</td>
                     <td>{comment}</td>
                     <td>{dueDate}</td>

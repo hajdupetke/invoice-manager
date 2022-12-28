@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import ProtectedRoute from "./util/ProtectedRoute";
+import ShowInvoice from "./pages/ShowInvoice";
 import Invoices from "./pages/Invoices";
 
 import reportWebVitals from "./reportWebVitals";
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
         path: "/invoices/:id",
         element: (
             <ProtectedRoute>
-                <Invoices />
+                <ShowInvoice />
             </ProtectedRoute>
         ),
     },
